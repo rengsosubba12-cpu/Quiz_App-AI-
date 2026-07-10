@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--
+    If you are serving your web app in a path other than the root, change the
+    href value below to reflect the base path you are serving from.
+    The path provided below has to start and end with a slash "/" in order for
+    it to work correctly.
+    For more details:
+    * https://developer.mozilla.org/en-US/docs/Web/HTML/Element/base
+    Fore more details on the Flutter Web manifest.json:
+    * https://developers.google.com/web/fundamentals/web-app-manifest/
+  -->
+  <base href="$FLUTTER_BASE_HREF">
+
+  <meta charset="UTF-8">
+  <meta content="IE=Edge" http-equiv="X-UA-Compatible">
+  <meta name="description" content="Smart Quiz — A Flutter-powered interactive quiz app.">
+
+  <!-- iOS meta tags & icons -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="apple-mobile-web-app-title" content="Smart Quiz">
+
+  <!-- Open Graph / Social -->
+  <meta property="og:title" content="Smart Quiz">
+  <meta property="og:description" content="Test your Flutter & Dart knowledge with Smart Quiz.">
+  <meta property="og:type" content="website">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png"/>
+
+  <!-- Web App Manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- Inter font from Google Fonts for pixel-perfect Stitch design on web -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <title>Smart Quiz</title>
+
+  <style>
+    /* Splash screen shown while Flutter engine initialises */
+    body {
+      margin: 0;
+      background-color: #faf9f9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      font-family: 'Inter', sans-serif;
+    }
+
+    #loading {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      color: #000666;
+    }
+
+    #loading .logo {
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #000666;
+    }
+
+    #loading .spinner {
+      width: 36px;
+      height: 36px;
+      border: 3px solid #e0e0ff;
+      border-top-color: #000666;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <!-- Loading splash shown before Flutter renders -->
+  <div id="loading">
+    <div class="logo">Smart Quiz</div>
+    <div class="spinner"></div>
+  </div>
+
+  <script>
+    window.addEventListener('flutter-first-frame', function () {
+      // Hide loading splash once Flutter paints its first frame
+      var loading = document.getElementById('loading');
+      if (loading) loading.style.display = 'none';
+    });
+  </script>
+
+  <script src="flutter_bootstrap.js" async></script>
+</body>
+</html>

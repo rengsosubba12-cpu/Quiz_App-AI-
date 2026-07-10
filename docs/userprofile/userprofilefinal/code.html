@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en" style=""><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Profile — Smart Quiz</title>
+<!-- Tailwind & Google Fonts -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@400;500;600;700;800&amp;family=Manrope:wght@300;400;500;600;700;800&amp;family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary-fixed-variant": "#8a4518",
+                        "inverse-primary": "#f0a878",
+                        "surface-container-lowest": "#ffffff",
+                        "on-primary-fixed": "#401a08",
+                        "outline": "#9a9088",
+                        "surface-container": "#f2ece4",
+                        "surface-container-highest": "#e6e0d6",
+                        "on-surface": "#3a302a",
+                        "surface-bright": "#faf5ee",
+                        "on-tertiary-container": "#3a2020",
+                        "error": "#c0392b",
+                        "surface": "#faf5ee",
+                        "on-secondary-container": "#605850",
+                        "secondary-container": "#eae2da",
+                        "on-primary": "#ffffff",
+                        "primary-container": "#e08850",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "surface-dim": "#dcd6cc",
+                        "on-primary-container": "#fbe8d8",
+                        "background": "#faf5ee",
+                        "tertiary": "#8c3c3c",
+                        "on-tertiary-fixed-variant": "#6e3030",
+                        "inverse-on-surface": "#faf5ee",
+                        "primary-fixed-dim": "#f0a878",
+                        "surface-variant": "#ece6dc",
+                        "on-tertiary-fixed": "#2e1515",
+                        "secondary-fixed": "#eae2da",
+                        "on-error-container": "#7a1a10",
+                        "surface-container-low": "#f6f0e8",
+                        "on-surface-variant": "#605850",
+                        "tertiary-fixed-dim": "#e8a0a0",
+                        "surface-container-high": "#ece6dc",
+                        "tertiary-fixed": "#fce0e0",
+                        "on-tertiary": "#ffffff",
+                        "error-container": "#fce4e0",
+                        "secondary-fixed-dim": "#cec6be",
+                        "inverse-surface": "#3a302a",
+                        "on-background": "#3a302a",
+                        "surface-tint": "#c2652a",
+                        "tertiary-container": "#d47070",
+                        "secondary": "#78706a",
+                        "primary-fixed": "#fbe8d8",
+                        "primary": "#c2652a",
+                        "outline-variant": "#d8d0c8",
+                        "on-secondary-fixed-variant": "#504840",
+                        "on-secondary-fixed": "#2a2420"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "fontFamily": {
+                        "headline": ["EB Garamond", "serif"],
+                        "display": ["EB Garamond", "serif"],
+                        "body": ["Manrope", "sans-serif"],
+                        "label": ["Manrope", "sans-serif"]
+                    },
+                    "boxShadow": {
+                        "sahara": "0 2px 16px rgba(58, 48, 42, 0.04)"
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        body {
+            background-color: #faf5ee;
+            color: #3a302a;
+            font-family: 'Manrope', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .glass-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(216, 208, 200, 0.4);
+        }
+        .gradient-text {
+            background: linear-gradient(135deg, #c2652a, #8c3c3c);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: auto auto;
+            gap: 1.5rem;
+        }
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+    
+    @media (prefers-reduced-motion: no-preference) {
+        .animate-fade-in-up {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.8s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-100 { animation-delay: 100ms; }
+        .delay-200 { animation-delay: 200ms; }
+        .delay-300 { animation-delay: 300ms; }
+        .delay-400 { animation-delay: 400ms; }
+        .delay-500 { animation-delay: 500ms; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+        .float-slow { animation: float 4s ease-in-out infinite; }
+        .float-medium { animation: float 3s ease-in-out infinite 0.5s; }
+        .float-fast { animation: float 2.5s ease-in-out infinite 1s; }
+
+        @keyframes lightning-shimmer {
+            0%, 95%, 100% { filter: brightness(1); }
+            96% { filter: brightness(1.4) contrast(1.1); }
+            97% { filter: brightness(1); }
+            98% { filter: brightness(1.6) contrast(1.2); }
+            99% { filter: brightness(1.2); }
+        }
+        .lightning-effect {
+            animation: lightning-shimmer 8s infinite;
+        }
+        
+        .progress-bar-fill {
+            transition: width 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) 0.5s;
+        }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .animate-fade-in-up {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+  </style>
+</head>
+<body class="bg-background text-on-surface min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="bg-background dark:bg-background border-b border-outline-variant/60 w-full top-0 sticky z-50">
+<div class="flex justify-between items-center px-6 py-4 w-full max-w-7xl mx-auto">
+<div class="flex items-center gap-4">
+<button class="hover:opacity-80 transition-opacity active:scale-95 duration-150">
+<span class="material-symbols-outlined text-primary dark:text-primary-fixed-dim">menu</span>
+</button>
+<h1 class="font-display text-2xl tracking-tight font-bold text-primary dark:text-primary-fixed-dim">Smart Quiz</h1>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-label text-sm font-semibold opacity-60">My Profile</span>
+<div class="w-10 h-10 rounded-full bg-surface-container-high overflow-hidden border border-outline-variant/40 cursor-pointer hover:opacity-80"><div class="w-full h-full overflow-hidden flex items-center justify-center bg-surface-container-high"><div class="w-[300%] h-[200%] flex-none relative" style="clip-path: inset(0% 33.33% 50% 33.33%)"><img class="absolute top-0 left-0 w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AP1WRLtsQrRCo6DCSQqFC2vwCigwR8MTyXAkOc7f55mE3qoa2hizhZ698Qa6BImllKQfOaxpb3p_2e6GtCqRCRKebwpbCYAZsyofgEqeHrMqCbcZDNS4x2jJlt089k9XQYMioQZv8nNDsjY2n-egZxtMn0QXQreN7BgcEYYqnn-ptOzH7CmLBayvHrUMIsd3Q_rhBxw8tQMOKVMK5NXzRSnt0ltqCJhGR7_DAWc-zMdWbf5pkYm7ggwFeuMi9Bo" style="transform: scale(3); transform-origin: 33.33% 0%;"/></div></div></div>
+</div>
+</div>
+</header>
+<main class="max-w-7xl mx-auto px-6 pt-12">
+<!-- Profile Header Section -->
+<section class="mb-16 flex flex-col md:flex-row items-center md:items-end gap-8">
+<div class="relative group animate-fade-in-up delay-100">
+<div class="w-32 h-32 md:w-40 md:h-40 rounded-[2.5rem] overflow-hidden shadow-sahara border-4 border-white transform rotate-3 transition-transform hover:rotate-0 duration-500 cursor-pointer">
+<div class="w-full h-full overflow-hidden flex items-center justify-center bg-surface-container-high"><img alt="Julian Alexander's Profile Portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuA00brN50YEyE7EpFOQ2psezw2L6bLZyKsM0iWf0PGytAU7tQ9dcnfXzE3Ui704ToXamC6Xbc4Yr1nD_9Ln7knuNPmWAx1MplZXapfttFd-Qx_eDznt1A2g1Ymry8bzVYQL2rUwUH9YiNM91G34dFsOatg5ZEgMVeI23jMfTsDNgBBNNarra30mlN5UmU7hZ9SkWeptpTkqRC2hs0Kxef8DGjFkfnZViGF4WI0B1sKDwk2PQyS-yydD"/></div>
+</div>
+<button class="absolute -bottom-2 -right-2 bg-primary text-on-primary w-10 h-10 rounded-full flex items-center justify-center shadow-lg hover:scale-110 active:scale-95 transition-all">
+<span class="material-symbols-outlined text-sm">edit</span>
+</button>
+</div>
+<div class="flex-1 text-center md:text-left animate-fade-in-up delay-200">
+<div class="mb-2">
+<input class="bg-transparent border-none p-0 font-display text-5xl md:text-6xl font-bold tracking-tight text-on-surface focus:ring-0 w-full md:w-auto hover:bg-surface-container-low transition-colors rounded-lg cursor-pointer" spellcheck="false" type="text" value="Julian Alexander"/>
+</div>
+<p class="font-body text-on-surface-variant text-lg max-w-md">Enthusiastic quizzer &amp; history buff. Mastering the art of trivial knowledge since 2021.</p>
+</div>
+<div class="flex gap-4 animate-fade-in-up delay-300">
+<div class="glass-card px-6 py-4 rounded-2xl text-center hover:scale-105 hover:shadow-lg active:scale-95 transition-all duration-300 cursor-pointer">
+<p class="font-display text-3xl font-bold text-primary">124</p>
+<p class="font-label text-[10px] uppercase tracking-widest opacity-60">Quizzes</p>
+</div>
+<div class="glass-card px-6 py-4 rounded-2xl text-center hover:scale-105 hover:shadow-lg active:scale-95 transition-all duration-300 cursor-pointer">
+<p class="font-display text-3xl font-bold text-tertiary">2.4k</p>
+<p class="font-label text-[10px] uppercase tracking-widest opacity-60">Points</p>
+</div>
+</div>
+</section>
+<!-- Bento Grid Progress -->
+<div class="bento-grid mb-16">
+<!-- Progress Card -->
+<div class="col-span-1 md:col-span-2 bg-surface-container-low p-8 rounded-[2rem] border border-outline-variant/30 flex flex-col justify-between min-h-[280px] animate-fade-in-up delay-400"><div><h3 class="font-display text-3xl mb-1">Your Accuracy</h3><p class="font-body text-sm text-on-surface-variant mb-8 font-medium">Your average score across all completed quizzes.</p></div><div class="relative w-full"><div class="flex justify-between items-end mb-3"><span class="font-display text-5xl font-bold leading-none">82<span class="text-xl">%</span></span><span class="font-label text-xs uppercase tracking-widest opacity-60 pb-1">Top 5% of Quizzers</span></div><div class="h-3 w-full bg-surface-container-highest rounded-full overflow-hidden"><div class="h-full bg-primary rounded-full progress-bar-fill" id="accuracy-progress" style="width: 0%"></div></div></div></div><div class="col-span-1 md:col-span-2 bg-white p-8 rounded-[2rem] border border-outline-variant/30 shadow-sahara animate-fade-in-up delay-500">
+<div class="flex items-center justify-between mb-6">
+<h3 class="font-display text-2xl font-bold">Unlocked Badges</h3>
+<span class="font-label text-xs uppercase tracking-widest text-primary font-bold cursor-pointer hover:underline">View All</span>
+</div>
+<div class="flex gap-6 overflow-x-auto pb-2">
+<div class="flex flex-col items-center gap-2 min-w-[80px] float-slow">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-primary-fixed shadow-sm hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"><img alt="Gold Sahara Scholar - Master Class Medal" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDoTQ-FdpAjceYA3uzE40LxFKG3ZeUwrChZWoqxFpG5DRQVIWaFwzDYEiQczIQVEs1nwJRDauVA4swMzutHFmiRg4eIALpeUDycsoXKy8n-HACrQnOiUXye2sfKHIRuIC-Z8pZQzlr9k8c1w_J26zat8kEgW6gY2XWBtEDAJr3YteNwe49T3gQTxL3DuY-YGdza5r_PmpEsXPCHfSjRhllEO8OqRfItzH9ExZ6CierLaMMJsrp0oCWz"/></div>
+<span class="font-label text-[10px] uppercase tracking-widest opacity-60">Gold</span>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[80px] float-medium">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-outline-variant/30 shadow-sm hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"><img alt="Platinum Ultimate Mastery Badge" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBla5edERoNtMvVlTL4MGFql7D58XrYTIfA4ZAAxny2nCaR8T79yRrznpSCJAlrGsbUQrrFE8tkir9WzLAmHFQlYg_eQpBLynqs1jmjDJ3ewRr0xHsIUfPdxzId4vAMhZAcOnSf-aKPdm7JTx3UqmAHX0L1cRnQ3j72pXlwWLrya5FuMD7-mbY3PQgWU0-TQuM4aja587qW_HcpegohKM1rPmeZKSI4xdWvhf8Ns3IXHTJpn_r6PjQf"/></div>
+<span class="font-label text-[10px] uppercase tracking-widest opacity-60">Platinum</span>
+</div>
+<div class="flex flex-col items-center gap-2 min-w-[80px] float-fast">
+<div class="w-20 h-20 rounded-full overflow-hidden border-2 border-outline-variant/30 shadow-sm hover:scale-110 active:scale-95 transition-all duration-300 cursor-pointer"><img alt="Silver Sahara Quiz Elite Master Achiever Badge" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBcYIiS_ApAHdpQztiZVD_jsNxIVACcXXqdJC58T3fW5GPZBweIyPqakliK0ZErjFRx-ejaOHmrzk-S0k5Tj12cw2DaKFawcwTYAT3ALiEgQsASa3tMRiWSRCrgG208DoJ-leQJv8RGUy0eERT4crBuQ-ezkfc-LjF8Z8nyRWyNRdOA7wfHjv2Q7WoIszWTCT0psu8HOEGel907rRaaw9nYCaU_J48SWnfreP1sVUi6KroNSkFCmCzC"/></div>
+<span class="font-label text-[10px] uppercase tracking-widest opacity-60">Silver</span>
+</div>
+</div>
+</div>
+<!-- Daily Streak -->
+<!-- Achievements -->
+</div>
+<!-- Favourite Categories -->
+<section class="mb-16 animate-fade-in-up delay-500">
+<div class="flex items-baseline justify-between mb-8">
+<h2 class="font-display text-4xl font-bold">Favourite Categories</h2>
+<button class="font-label text-xs uppercase tracking-widest text-primary font-bold hover:underline">Customize</button>
+</div>
+<div class="flex flex-wrap gap-4">
+<!-- Category Tag -->
+<div class="group cursor-pointer">
+<div class="flex items-center gap-3 px-6 py-4 rounded-full bg-white border border-outline-variant/30 hover:bg-primary-fixed hover:scale-105 active:scale-95 hover:shadow-md transition-all duration-300 shadow-sm">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">history</span>
+<span class="font-body font-semibold">Ancient History</span>
+<span class="material-symbols-outlined text-xs opacity-0 group-hover:opacity-100 transition-opacity">close</span>
+</div>
+</div>
+<!-- Category Tag -->
+<div class="group cursor-pointer">
+<div class="flex items-center gap-3 px-6 py-4 rounded-full bg-white border border-outline-variant/30 hover:bg-primary-fixed hover:scale-105 active:scale-95 hover:shadow-md transition-all duration-300 shadow-sm">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">science</span>
+<span class="font-body font-semibold">Astrophysics</span>
+<span class="material-symbols-outlined text-xs opacity-0 group-hover:opacity-100 transition-opacity">close</span>
+</div>
+</div>
+<!-- Category Tag -->
+<div class="group cursor-pointer">
+<div class="flex items-center gap-3 px-6 py-4 rounded-full bg-white border border-outline-variant/30 hover:bg-primary-fixed hover:scale-105 active:scale-95 hover:shadow-md transition-all duration-300 shadow-sm">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">brush</span>
+<span class="font-body font-semibold">Renaissance Art</span>
+<span class="material-symbols-outlined text-xs opacity-0 group-hover:opacity-100 transition-opacity">close</span>
+</div>
+</div>
+<!-- Category Tag -->
+<div class="group cursor-pointer">
+<div class="flex items-center gap-3 px-6 py-4 rounded-full bg-white border border-outline-variant/30 hover:bg-primary-fixed hover:scale-105 active:scale-95 hover:shadow-md transition-all duration-300 shadow-sm">
+<span class="material-symbols-outlined text-primary group-hover:scale-110 transition-transform">architecture</span>
+<span class="font-body font-semibold">Brutalist Design</span>
+<span class="material-symbols-outlined text-xs opacity-0 group-hover:opacity-100 transition-opacity">close</span>
+</div>
+</div>
+<!-- Add New -->
+<button class="flex items-center gap-3 px-6 py-4 rounded-full border-2 border-dashed border-outline-variant/60 hover:border-primary/60 hover:bg-primary-fixed/20 hover:scale-105 active:scale-95 transition-all duration-300">
+<span class="material-symbols-outlined text-on-surface-variant">add</span>
+<span class="font-body font-medium text-on-surface-variant">Add Topic</span>
+</button>
+</div>
+</section>
+<!-- Aesthetic Decoration -->
+<div class="relative w-full h-64 mt-20 rounded-[3rem] overflow-hidden opacity-60"><img alt="A high-quality, 'human-designed' anime illustration of a dramatic warrior character seen from behind, standing in a vast, dark desert under a stormy sky with lightning." class="w-full h-full object-cover lightning-effect" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC3x8MOnPK9cdfb2ogmFMHjdVTlTW-OP-74N-3kB7nVdle5iUQ4DX4Pzu7HRC_t1PQY0FO--NjfJfa9kDOpdwxCpJrVOSe59KpV1LgF7yUFYOH4xkuSvyd7ustNXBhD0dGhZmOhUr44jj1nWZd3gNwdMGuWp-I4n3T_pp_gUq0e6wTQbjIHqInV2dAiA_0bdQvCOdEYneQxkWdXhjZ3bg_HMkbPh_LqKBUvpROwmor_D6P1E4Q7Qjpw"/><div class="absolute inset-0 bg-gradient-to-t from-background via-transparent to-transparent"></div></div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-xl bg-surface-container-low dark:bg-surface-container-low shadow-sm border-t border-outline-variant/30">
+<div class="flex justify-around items-center pt-3 pb-6 px-4 max-w-7xl mx-auto">
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant opacity-60 hover:text-primary transition-colors active:translate-y-[-2px] duration-200" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="font-label text-xs uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant opacity-60 hover:text-primary transition-colors active:translate-y-[-2px] duration-200" href="#">
+<span class="material-symbols-outlined">history</span>
+<span class="font-label text-xs uppercase tracking-widest mt-1">History</span>
+</a>
+<a class="flex flex-col items-center justify-center text-on-secondary-fixed-variant opacity-60 hover:text-primary transition-colors active:translate-y-[-2px] duration-200" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-label text-xs uppercase tracking-widest mt-1">Settings</span>
+</a>
+<a class="flex flex-col items-center justify-center text-primary dark:text-primary-fixed-dim font-bold active:translate-y-[-2px] duration-200" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">person</span>
+<span class="font-label text-xs uppercase tracking-widest mt-1">Profile</span>
+</a>
+</div>
+</nav>
+<script>
+        // Micro-interaction for the name input
+        const nameInput = document.querySelector('input[type="text"]');
+        nameInput.addEventListener('focus', () => {
+            nameInput.classList.add('bg-white', 'shadow-sahara', 'px-4');
+        });
+        nameInput.addEventListener('blur', () => {
+            nameInput.classList.remove('bg-white', 'shadow-sahara', 'px-4');
+        });
+
+        // Trigger progress bar animation on load
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressBar = document.getElementById('accuracy-progress');
+            if (progressBar && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                // Slight delay to ensure transition registers after render
+                setTimeout(() => {
+                    progressBar.style.width = '82%';
+                }, 50);
+            } else if (progressBar) {
+                progressBar.style.width = '82%';
+            }
+        });
+    </script>
+</body></html>

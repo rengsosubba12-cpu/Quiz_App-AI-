@@ -1,0 +1,42 @@
+name: smart_quiz
+description: A Smart Quiz Flutter application — Material Design 3 with Cognitive Flow / Sahara design system.
+version: 1.0.0+1
+publish_to: 'none'
+
+environment:
+  sdk: '>=3.3.0 <4.0.0'
+
+# ─── Runtime dependencies ──────────────────────────────────────────────────────
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Inter / EB Garamond / Manrope fonts via Google Fonts
+  google_fonts: ^6.2.1
+
+  # Global state management (ChangeNotifier + Provider)
+  provider: ^6.1.2
+
+  # High-drama animations for Profile screen (flutter_animate)
+  flutter_animate: ^4.5.0
+  
+  # AI quiz generation using Google Gemini
+  google_generative_ai: ^0.4.6
+  youtube_player_flutter: ^10.0.1
+
+  # Background music playback
+  audioplayers: ^6.1.0
+
+# ─── Dev-only dependencies ────────────────────────────────────────────────────
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^4.0.0
+
+# ─── Flutter-specific configuration ──────────────────────────────────────────
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/images/
+    - assets/audio/
